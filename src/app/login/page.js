@@ -89,7 +89,7 @@ export default function LoginPage() {
     return (
       <div className="flex min-h-[calc(100vh-200px)] items-center justify-center">
         <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-orange-600 border-r-transparent"></div>
           <p className="mt-4 text-gray-600">Loading...</p>
         </div>
       </div>
@@ -102,18 +102,20 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-200px)] items-center justify-center bg-gray-50 px-4 py-12">
+    <div className="flex min-h-[calc(100vh-200px)] items-center justify-center bg-gradient-to-br from-gray-50 to-orange-50 px-4 py-12">
       <div className="w-full max-w-md">
-        <div className="rounded-lg bg-white p-8 shadow-lg">
+        <div className="rounded-2xl bg-white p-8 shadow-xl border border-gray-100">
           {/* Logo and Title */}
           <div className="mb-8 text-center">
-            <Image
-              src="/logo.png"
-              alt="Project FPV"
-              width={60}
-              height={60}
-              className="mx-auto mb-4 object-contain"
-            />
+            <div className="mx-auto mb-4 w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center shadow-lg">
+              <Image
+                src="/logo.png"
+                alt="Project FPV"
+                width={40}
+                height={40}
+                className="object-contain invert"
+              />
+            </div>
             <h1 className="text-2xl font-bold text-gray-900">
               {isLogin ? 'Welcome Back' : 'Join Project FPV'}
             </h1>
@@ -128,7 +130,7 @@ export default function LoginPage() {
           <button
             onClick={handleGoogleSignIn}
             disabled={loading}
-            className="mb-6 flex w-full items-center justify-center gap-3 rounded-md border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:opacity-50"
+            className="mb-6 flex w-full items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm disabled:opacity-50"
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24">
               <path
@@ -153,10 +155,10 @@ export default function LoginPage() {
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
+              <div className="w-full border-t border-gray-200"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-gray-500">Or continue with email</span>
+              <span className="bg-white px-4 text-gray-500">Or continue with email</span>
             </div>
           </div>
 
@@ -174,7 +176,7 @@ export default function LoginPage() {
                   required={!isLogin}
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                  className="mt-1 block w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all"
                   placeholder="Your name"
                 />
               </div>
@@ -191,7 +193,7 @@ export default function LoginPage() {
                 required
                 value={formData.email}
                 onChange={handleInputChange}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                className="mt-1 block w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all"
                 placeholder="your@email.com"
               />
             </div>
@@ -207,7 +209,7 @@ export default function LoginPage() {
                 required
                 value={formData.password}
                 onChange={handleInputChange}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+                className="mt-1 block w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all"
                 placeholder="••••••••"
                 minLength={6}
               />
@@ -219,7 +221,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-md bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
+              className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-4 py-3.5 text-sm font-semibold text-white transition-all hover:from-orange-600 hover:to-red-700 hover:shadow-lg disabled:opacity-50"
             >
               {loading ? 'Please wait...' : isLogin ? 'Sign In' : 'Create Account'}
             </button>
@@ -232,7 +234,7 @@ export default function LoginPage() {
                 setIsLogin(!isLogin);
                 setFormData({ name: '', email: '', password: '' });
               }}
-              className="text-blue-600 hover:text-blue-700"
+              className="text-orange-600 hover:text-orange-700 font-medium transition-colors"
             >
               {isLogin
                 ? "Don't have an account? Sign up"

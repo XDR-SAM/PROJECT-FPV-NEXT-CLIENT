@@ -67,34 +67,37 @@ export default function BlogsPage() {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-900">FPV Drone Blog Posts</h1>
-          <p className="mt-2 text-lg text-gray-600">
+        <div className="mb-10 text-center">
+          <span className="inline-block rounded-full bg-orange-100 px-4 py-1 text-sm font-semibold text-orange-700 mb-4">
+            Explore
+          </span>
+          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">FPV Drone Blog Posts</h1>
+          <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
             Explore stories, tips, and experiences shared by FPV pilots around the world
           </p>
         </div>
 
         {/* Search & Filter Bar */}
-        <div className="mb-8 space-y-4 rounded-lg bg-white p-4 shadow-sm md:flex md:items-center md:gap-4 md:space-y-0">
+        <div className="mb-8 space-y-4 rounded-2xl bg-white p-6 shadow-sm border border-gray-100 md:flex md:items-center md:gap-4 md:space-y-0">
           {/* Search */}
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+            <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               placeholder="Search blogs by title, author, or content..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-md border border-gray-300 py-2 pl-10 pr-4 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded-xl border border-gray-200 py-3 pl-12 pr-4 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all"
             />
           </div>
 
           {/* Category Filter */}
           <div className="relative">
-            <Filter className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+            <Filter className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full appearance-none rounded-md border border-gray-300 py-2 pl-10 pr-8 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 md:w-48"
+              className="w-full appearance-none rounded-xl border border-gray-200 py-3 pl-12 pr-10 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 md:w-48 transition-all"
             >
               <option value="All">All Categories</option>
               <option value="Freestyle">Freestyle</option>
@@ -108,11 +111,11 @@ export default function BlogsPage() {
 
           {/* Sort */}
           <div className="relative">
-            <ArrowUpDown className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+            <ArrowUpDown className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="w-full appearance-none rounded-md border border-gray-300 py-2 pl-10 pr-8 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 md:w-48"
+              className="w-full appearance-none rounded-xl border border-gray-200 py-3 pl-12 pr-10 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 md:w-48 transition-all"
             >
               <option value="latest">Latest</option>
               <option value="likes">Most Liked</option>
@@ -127,7 +130,7 @@ export default function BlogsPage() {
             'Loading...'
           ) : (
             <>
-              Found <span className="font-semibold">{blogs.length}</span> blog
+              Found <span className="font-semibold text-orange-600">{blogs.length}</span> blog
               {blogs.length !== 1 ? 's' : ''}
             </>
           )}
@@ -137,7 +140,7 @@ export default function BlogsPage() {
         {loading ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-96 animate-pulse rounded-lg bg-gray-200"></div>
+              <div key={i} className="h-96 animate-pulse rounded-xl bg-gray-200"></div>
             ))}
           </div>
         ) : blogs.length > 0 ? (
@@ -147,8 +150,11 @@ export default function BlogsPage() {
             ))}
           </div>
         ) : (
-          <div className="rounded-lg bg-white p-12 text-center shadow-sm">
-            <p className="text-lg text-gray-600">No blog posts found.</p>
+          <div className="rounded-2xl bg-white p-16 text-center shadow-sm border border-gray-100">
+            <div className="mx-auto w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+              <Search className="h-8 w-8 text-orange-500" />
+            </div>
+            <p className="text-lg font-semibold text-gray-900">No blog posts found.</p>
             <p className="mt-2 text-sm text-gray-500">
               Try adjusting your search or filters.
             </p>
@@ -158,4 +164,3 @@ export default function BlogsPage() {
     </div>
   );
 }
-

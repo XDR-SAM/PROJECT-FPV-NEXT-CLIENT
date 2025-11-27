@@ -119,13 +119,13 @@ function CreateBlogForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50 py-12">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
           <Link
             href="/blogs"
-            className="mb-4 inline-flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-blue-600"
+            className="mb-4 inline-flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-orange-600"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Blogs
@@ -135,7 +135,7 @@ function CreateBlogForm() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-6 rounded-lg bg-white p-6 shadow-sm">
+        <form onSubmit={handleSubmit} className="space-y-6 rounded-2xl bg-white p-8 shadow-sm border border-gray-100">
           {/* Title */}
           <div>
             <label htmlFor="title" className="block text-sm font-medium text-gray-700">
@@ -147,10 +147,10 @@ function CreateBlogForm() {
               name="title"
               value={formData.title}
               onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md border px-3 py-2 text-gray-900 shadow-sm focus:outline-none focus:ring-1 ${
+              className={`mt-1 block w-full rounded-xl border px-4 py-3 text-gray-900 shadow-sm focus:outline-none focus:ring-2 transition-all ${
                 errors.title
-                  ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+                  ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+                  : 'border-gray-200 focus:border-orange-500 focus:ring-orange-500/20'
               }`}
               placeholder="Enter blog post title"
             />
@@ -172,10 +172,10 @@ function CreateBlogForm() {
               maxLength={150}
               value={formData.excerpt}
               onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md border px-3 py-2 text-gray-900 shadow-sm focus:outline-none focus:ring-1 ${
+              className={`mt-1 block w-full rounded-xl border px-4 py-3 text-gray-900 shadow-sm focus:outline-none focus:ring-2 transition-all ${
                 errors.excerpt
-                  ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+                  ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+                  : 'border-gray-200 focus:border-orange-500 focus:ring-orange-500/20'
               }`}
               placeholder="Brief description of your blog post (max 150 characters)"
             />
@@ -192,10 +192,10 @@ function CreateBlogForm() {
               name="category"
               value={formData.category}
               onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md border px-3 py-2 text-gray-900 shadow-sm focus:outline-none focus:ring-1 ${
+              className={`mt-1 block w-full rounded-xl border px-4 py-3 text-gray-900 shadow-sm focus:outline-none focus:ring-2 transition-all ${
                 errors.category
-                  ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+                  ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+                  : 'border-gray-200 focus:border-orange-500 focus:ring-orange-500/20'
               }`}
             >
               <option value="">Select a category</option>
@@ -220,10 +220,10 @@ function CreateBlogForm() {
               rows="15"
               value={formData.content}
               onChange={handleContentChange}
-              className={`mt-1 block w-full rounded-md border px-3 py-2 text-gray-900 shadow-sm focus:outline-none focus:ring-1 ${
+              className={`mt-1 block w-full rounded-xl border px-4 py-3 text-gray-900 shadow-sm focus:outline-none focus:ring-2 transition-all ${
                 errors.content
-                  ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500'
+                  ? 'border-red-300 focus:border-red-500 focus:ring-red-500/20'
+                  : 'border-gray-200 focus:border-orange-500 focus:ring-orange-500/20'
               }`}
               placeholder="Write your blog post content here..."
             />
@@ -244,7 +244,7 @@ function CreateBlogForm() {
               name="tags"
               value={formData.tags}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all"
               placeholder="tag1, tag2, tag3 (comma-separated)"
             />
             <p className="mt-1 text-xs text-gray-500">Separate tags with commas</p>
@@ -262,14 +262,14 @@ function CreateBlogForm() {
                 name="featuredImage"
                 value={formData.featuredImage}
                 onChange={handleInputChange}
-                className="block flex-1 rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="block flex-1 rounded-xl border border-gray-200 px-4 py-3 text-gray-900 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all"
                 placeholder="https://example.com/image.jpg"
               />
             </div>
             {formData.featuredImage && (
-              <div className="mt-2">
+              <div className="mt-3">
                 <p className="mb-2 text-xs text-gray-500">Preview:</p>
-                <div className="relative h-32 w-full overflow-hidden rounded-md border border-gray-200">
+                <div className="relative h-40 w-full overflow-hidden rounded-xl border border-gray-200">
                   <img
                     src={formData.featuredImage}
                     alt="Preview"
@@ -295,7 +295,7 @@ function CreateBlogForm() {
               min="1"
               value={formData.readTime}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="mt-1 block w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 transition-all"
               placeholder="Auto-calculated"
             />
             <p className="mt-1 text-xs text-gray-500">
@@ -308,13 +308,13 @@ function CreateBlogForm() {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 rounded-md bg-blue-600 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-blue-700 disabled:opacity-50"
+              className="flex-1 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-6 py-4 text-base font-semibold text-white transition-all hover:from-orange-600 hover:to-red-700 hover:shadow-lg disabled:opacity-50"
             >
               {loading ? 'Publishing...' : 'Publish Post'}
             </button>
             <Link
               href="/blogs"
-              className="rounded-md border border-gray-300 px-6 py-3 text-base font-semibold text-gray-700 transition-colors hover:bg-gray-50"
+              className="rounded-xl border border-gray-200 px-6 py-4 text-base font-semibold text-gray-700 transition-all hover:bg-gray-50 hover:border-gray-300"
             >
               Cancel
             </Link>

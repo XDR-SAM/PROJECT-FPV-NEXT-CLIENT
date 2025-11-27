@@ -15,7 +15,7 @@ export default function BlogCard({ blog }) {
 
   return (
     <Link href={`/blogs/${blog._id}`}>
-      <div className="group h-full cursor-pointer overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+      <div className="group h-full cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-orange-200">
         {/* Featured Image */}
         <div className="relative h-48 w-full overflow-hidden bg-gray-200">
           {blog.featuredImage ? (
@@ -23,24 +23,26 @@ export default function BlogCard({ blog }) {
               src={blog.featuredImage}
               alt={blog.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
           ) : (
-            <div className="flex h-full items-center justify-center bg-linear-to-br from-blue-400 to-blue-600">
+            <div className="flex h-full items-center justify-center bg-gradient-to-br from-orange-400 via-red-500 to-red-600">
               <span className="text-4xl">🚁</span>
             </div>
           )}
+          {/* Overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
 
         {/* Content */}
         <div className="p-5">
           {/* Category Badge */}
-          <span className="mb-2 inline-block rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800">
+          <span className="mb-2 inline-block rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
             {blog.category}
           </span>
 
           {/* Title */}
-          <h3 className="mb-2 line-clamp-2 text-lg font-bold text-gray-900 group-hover:text-blue-600">
+          <h3 className="mb-2 line-clamp-2 text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors">
             {blog.title}
           </h3>
 
@@ -91,4 +93,3 @@ export default function BlogCard({ blog }) {
     </Link>
   );
 }
-

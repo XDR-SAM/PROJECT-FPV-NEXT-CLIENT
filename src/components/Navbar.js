@@ -11,6 +11,7 @@ export default function Navbar() {
   const { user, loading, signOut } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const userMenuRef = useRef(null);
 
   useEffect(() => {
@@ -24,6 +25,14 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 10);
+    }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleLogout = async () => {
     const result = await signOut();
     if (result.success) {
@@ -35,44 +44,48 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white shadow-sm">
+    <nav className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      scrolled 
+        ? 'border-b border-gray-200 bg-white/95 backdrop-blur-md shadow-md' 
+        : 'border-b border-gray-200 bg-white shadow-sm'
+    }`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 group">
             <Image
               src="/logo.png"
               alt="Project FPV"
               width={40}
               height={40}
-              className="object-contain"
+              className="object-contain transition-transform group-hover:scale-105"
             />
-            <span className="text-xl font-bold text-gray-900">Project FPV</span>
+            <span className="text-xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors">Project FPV</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-8 md:flex">
             <Link
               href="/"
-              className="text-sm font-medium text-gray-700 transition-colors hover:text-blue-600"
+              className="text-sm font-medium text-gray-700 transition-colors hover:text-orange-600"
             >
               Home
             </Link>
             <Link
               href="/blogs"
-              className="text-sm font-medium text-gray-700 transition-colors hover:text-blue-600"
+              className="text-sm font-medium text-gray-700 transition-colors hover:text-orange-600"
             >
               Blogs
             </Link>
             <Link
               href="/about"
-              className="text-sm font-medium text-gray-700 transition-colors hover:text-blue-600"
+              className="text-sm font-medium text-gray-700 transition-colors hover:text-orange-600"
             >
               About FPV
             </Link>
             <Link
               href="/community"
-              className="text-sm font-medium text-gray-700 transition-colors hover:text-blue-600"
+              className="text-sm font-medium text-gray-700 transition-colors hover:text-orange-600"
             >
               Community
             </Link>
@@ -84,7 +97,7 @@ export default function Navbar() {
               <div className="relative" ref={userMenuRef}>
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center gap-2 rounded-full border border-gray-200 p-1.5 transition-colors hover:border-gray-300"
+                  className="flex items-center gap-2 rounded-full border border-gray-200 p-1.5 transition-all hover:border-orange-300 hover:shadow-sm"
                 >
                   {user.photoURL ? (
                     <Image
@@ -95,7 +108,7 @@ export default function Navbar() {
                       className="rounded-full"
                     />
                   ) : (
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-red-600 text-white">
                       <User className="h-4 w-4" />
                     </div>
                   )}
@@ -103,7 +116,7 @@ export default function Navbar() {
 
                 {/* User Dropdown */}
                 {isUserMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-56 rounded-lg border border-gray-200 bg-white shadow-lg">
+                  <div className="absolute right-0 mt-2 w-56 rounded-lg border border-gray-200 bg-white shadow-lg animate-in fade-in slide-in-from-top-2 duration-200">
                     <div className="border-b border-gray-100 p-3">
                       <p className="text-sm font-semibold text-gray-900">
                         {user.displayName || 'User'}
@@ -113,7 +126,7 @@ export default function Navbar() {
                     <div className="p-1">
                       <Link
                         href="/create-blog"
-                        className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
+                        className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-orange-50 hover:text-orange-600"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <Plus className="h-4 w-4" />
@@ -121,7 +134,7 @@ export default function Navbar() {
                       </Link>
                       <Link
                         href="/my-blogs"
-                        className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
+                        className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-orange-50 hover:text-orange-600"
                         onClick={() => setIsUserMenuOpen(false)}
                       >
                         <FileText className="h-4 w-4" />
@@ -141,7 +154,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                className="rounded-md bg-gradient-to-r from-orange-500 to-red-600 px-4 py-2 text-sm font-medium text-white transition-all hover:from-orange-600 hover:to-red-700 hover:shadow-md"
               >
                 Login
               </Link>
@@ -151,7 +164,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden"
+            className="md:hidden p-2 rounded-md hover:bg-gray-100 transition-colors"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
@@ -164,31 +177,31 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="border-t border-gray-200 py-4 md:hidden">
+          <div className="border-t border-gray-200 py-4 md:hidden animate-in slide-in-from-top-2 duration-200">
             <Link
               href="/"
-              className="block py-2 text-sm font-medium text-gray-700"
+              className="block py-2 text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/blogs"
-              className="block py-2 text-sm font-medium text-gray-700"
+              className="block py-2 text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Blogs
             </Link>
             <Link
               href="/about"
-              className="block py-2 text-sm font-medium text-gray-700"
+              className="block py-2 text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               About FPV
             </Link>
             <Link
               href="/community"
-              className="block py-2 text-sm font-medium text-gray-700"
+              className="block py-2 text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Community
@@ -197,14 +210,14 @@ export default function Navbar() {
               <>
                 <Link
                   href="/create-blog"
-                  className="block py-2 text-sm font-medium text-gray-700"
+                  className="block py-2 text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Create Blog Post
                 </Link>
                 <Link
                   href="/my-blogs"
-                  className="block py-2 text-sm font-medium text-gray-700"
+                  className="block py-2 text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   My Blog Posts
@@ -222,7 +235,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="block rounded-md bg-blue-600 px-4 py-2 text-center text-sm font-medium text-white"
+                className="mt-2 block rounded-md bg-gradient-to-r from-orange-500 to-red-600 px-4 py-2 text-center text-sm font-medium text-white"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Login
