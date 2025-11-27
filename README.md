@@ -1,5 +1,11 @@
 # Project FPV 
 
+## Live Link 
+ https://project-fpv-next-client.vercel.app
+
+## Backend GitHub repo :
+https://github.com/XDR-SAM/PROJECT-FPV-EXPRESS-SERVER.git
+
 ## Prerequisites
 
 - Node.js 18+ installed
